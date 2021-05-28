@@ -1,6 +1,6 @@
 # CloudUp
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/jyrama/cloudup/Rust)
+[![Rust](https://github.com/jyrama/cloudup/actions/workflows/rust.yml/badge.svg)](https://github.com/jyrama/cloudup/actions/workflows/rust.yml)
 
 Stuff for working with UpCloud APIs. You know, this company: [https://upcloud.com/](https://upcloud.com/).
 
