@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "cloudup",
+    "uppermine",
+    "ssh-tests"
+]
