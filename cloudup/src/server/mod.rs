@@ -302,7 +302,7 @@ pub async fn create_from_template(
     zone: String,
     user_data: String,
     username: String,
-    ssh_keys: Vec<String>
+    ssh_keys: Vec<String>,
 ) -> Result<CreateServerResponse, reqwest::Error> {
     let url = format!("{}/1.3/server/", ctx.uc_baseurl);
     let client = reqwest::Client::new();
@@ -313,42 +313,42 @@ pub async fn create_from_template(
             hostname,
             plan: plan_name,
             storage_devices: StartServerStorageDevicesField {
-              storage_device: vec![
-                StartServerStorageDevice {
-                  action: String::from("clone"),
-                  storage: template_uuid,
-                  title: storage_title,
-                  size: storage_size,
-                  tier: String::from("maxiops")
-                }
-              ]
+                storage_device: vec![StartServerStorageDevice {
+                    action: String::from("clone"),
+                    storage: template_uuid,
+                    title: storage_title,
+                    size: storage_size,
+                    tier: String::from("maxiops"),
+                }],
             },
             networking: StartServerNetworkingField {
-              interfaces: StartServerInterfacesField {
-                interface: vec![
-                  IpAddrTypePair {
-                    ip_addresses: IpAddressThing { ip_address: vec![ IpAddressSpecs { family: String::from("IPv4") }] },
-                    ip_address_type: String::from("public")
-                  },
-                //   IpAddrTypePair {
-                //     ip_addresses: IpAddressThing { ip_address: vec![ IpAddressSpecs { family: String::from("IPv4") }] },
-                //     ip_address_type: String::from("utility")
-                //   },
-                //   IpAddrTypePair {
-                //     ip_addresses: IpAddressThing { ip_address: vec![ IpAddressSpecs { family: String::from("IPv6") }] },
-                //     ip_address_type: String::from("public")
-                //   }
-                ]
-              }
+                interfaces: StartServerInterfacesField {
+                    interface: vec![
+                        IpAddrTypePair {
+                            ip_addresses: IpAddressThing {
+                                ip_address: vec![IpAddressSpecs {
+                                    family: String::from("IPv4"),
+                                }],
+                            },
+                            ip_address_type: String::from("public"),
+                        },
+                        //   IpAddrTypePair {
+                        //     ip_addresses: IpAddressThing { ip_address: vec![ IpAddressSpecs { family: String::from("IPv4") }] },
+                        //     ip_address_type: String::from("utility")
+                        //   },
+                        //   IpAddrTypePair {
+                        //     ip_addresses: IpAddressThing { ip_address: vec![ IpAddressSpecs { family: String::from("IPv6") }] },
+                        //     ip_address_type: String::from("public")
+                        //   }
+                    ],
+                },
             },
             login_user: StartServerLoginUserField {
-               username,
-               ssh_keys: StartServerSshKeysField {
-                 ssh_key: ssh_keys
-               }
+                username,
+                ssh_keys: StartServerSshKeysField { ssh_key: ssh_keys },
             },
-            user_data
-          }
+            user_data,
+        },
     };
 
     let json_response = client
@@ -361,5 +361,4 @@ pub async fn create_from_template(
         .await?;
 
     return Ok(json_response);
-
 }

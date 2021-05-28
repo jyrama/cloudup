@@ -5,7 +5,6 @@ pub mod server;
 pub mod storage;
 pub mod zones;
 
-
 struct Credentials {
     user: String,
     pass: Option<String>,
@@ -22,8 +21,8 @@ impl Context {
             uc_baseurl: endpoint,
             credentials: Credentials {
                 user,
-                pass: Some(password)
-            }
+                pass: Some(password),
+            },
         };
     }
 }
